@@ -13,3 +13,11 @@ Then(
     expect(content).toBe(expectedElementText);
   }
 );
+
+Then(/^the "([^"]*)" should be displayed$/, async (elementKey: string) => {
+  console.log(`the ${elementKey} should be displayed`);
+
+  const locator = global.page.locator("[data-id='header-logo']");
+
+  await expect(locator).toBeVisible();
+});
