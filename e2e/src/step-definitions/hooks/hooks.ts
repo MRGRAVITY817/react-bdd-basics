@@ -1,19 +1,22 @@
-import { BeforeAll, Before, AfterAll, After } from "@cucumber/cucumber"
-const { chromium } = require("playwright")
+import { BeforeAll, Before, AfterAll, After } from "@cucumber/cucumber";
+const { chromium } = require("playwright");
 
 BeforeAll(async () => {
-  global.browser = await chromium.launch({ headless: false })
-})
+  global.browser = await chromium.launch({
+    // Don't show the browser (essential for running test in CI, or GUI-less env)
+    headless: true,
+  });
+});
 
 AfterAll(async () => {
-  await global.browser.close()
-})
+  await global.browser.close();
+});
 
 Before(async () => {
-  global.context = await global.browser.newContext()
-  global.page = await global.context.newPage()
-})
+  global.context = await global.browser.newContext();
+  global.page = await global.context.newPage();
+});
 
 After(async () => {
-  await global.page.close()
-})
+  await global.page.close();
+});
