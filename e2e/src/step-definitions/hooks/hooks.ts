@@ -13,6 +13,7 @@ AfterAll(async () => {
 });
 
 Before(async () => {
+  // `newContext()` is a completely new context (same as incognito)
   global.context = await global.browser.newContext();
   global.page = await global.context.newPage();
 });
