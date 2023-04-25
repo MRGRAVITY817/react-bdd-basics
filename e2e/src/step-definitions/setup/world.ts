@@ -11,6 +11,7 @@ import {
   setWorldConstructor,
   IWorld,
 } from "@cucumber/cucumber";
+import { env } from "../../env/parseEnv";
 
 export type Screen = {
   browser: Browser;
