@@ -1,4 +1,4 @@
-import { BeforeAll, Before, AfterAll, After } from "@cucumber/cucumber";
+import { Before, After } from "@cucumber/cucumber";
 import { ScenarioWorld } from "./world";
 
 Before(async function (this: ScenarioWorld, scenario) {
@@ -9,14 +9,22 @@ Before(async function (this: ScenarioWorld, scenario) {
   };
 
   const ready = await this.init(contextOptions);
+  return ready;
 });
 
 After(async function (this: ScenarioWorld, scenario) {
+  const {
+    screen: { page, browser },
+  } = this;
+
   const scenarioStatus = scenario.result?.status;
+
   if (scenarioStatus === "FAILED") {
     await global.page.screenshot({
       path: `./reports/screenshots/${scenario.pickle.name}.png`,
     });
   }
-  await global.page.close();
+
+  await browser.close();
+  return browser;
 });
