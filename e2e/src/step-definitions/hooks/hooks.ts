@@ -13,7 +13,7 @@ AfterAll(async () => {
 });
 
 Before(async (scenario) => {
-  // `newContext()` is a completely new context (same as incognito)
+  // `newContext()` creates completely new browser environment (same as incognito)
   global.context = await global.browser.newContext({
     recordVideo: {
       dir: "./reports/videos/" + scenario.pickle.name,
@@ -22,6 +22,12 @@ Before(async (scenario) => {
   global.page = await global.context.newPage();
 });
 
-After(async () => {
+After(async (scenario) => {
+  const scenarioStatus = scenario.result?.status;
+  if (scenarioStatus === "FAILED") {
+    await global.page.screenshot({
+      path: `./reports/screenshots/${scenario.pickle.name}.png`,
+    });
+  }
   await global.page.close();
 });
