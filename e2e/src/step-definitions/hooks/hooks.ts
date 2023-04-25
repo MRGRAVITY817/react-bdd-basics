@@ -12,9 +12,13 @@ AfterAll(async () => {
   await global.browser.close();
 });
 
-Before(async () => {
+Before(async (scenario) => {
   // `newContext()` is a completely new context (same as incognito)
-  global.context = await global.browser.newContext();
+  global.context = await global.browser.newContext({
+    recordVideo: {
+      dir: "./reports/videos/" + scenario.pickle.name,
+    },
+  });
   global.page = await global.context.newPage();
 });
 
