@@ -23,6 +23,7 @@
     "@babel/preset-typescript": "^7.21.5",
     "@cucumber/cucumber": "^9.1.0",
     "@playwright/test": "^1.32.3",
+    "dotenv": "^16.0.3",
     "playwright": "^1.32.3",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
