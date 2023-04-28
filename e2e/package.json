@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "transpile": "rimraf dist && babel --extensions .ts --out-dir dist src",
-    "cucumber": "pnpm transpile && cucumber-js",
-    "cucumber:dev": "UI_AUTOMATION_BROWSER=chromium pnpm cucumber --profile dev",
-    "cucumber:smoke": "UI_AUTOMATION_BROWSER=chromium pnpm cucumber --profile smoke",
-    "cucumber:regression": "UI_AUTOMATION_BROWSER=chromium pnpm cucumber --profile regression"
+    "cucumber-compile": "pnpm transpile && cucumber-js",
+    "cucumber": "COMMON_CONFIG_FILE=env/common.env pnpm cucumber-compile",
+    "cucumber:dev": "pnpm cucumber --profile dev",
+    "cucumber:smoke": "pnpm cucumber --profile smoke",
+    "cucumber:regression": "pnpm cucumber --profile regression"
   },
   "keywords": [],
   "author": "",
